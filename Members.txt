@@ -6,4 +6,8 @@ MEMBER 2 CASSANDRA
 
 MEMBER 3 JOHN LI
 
+<<<<<<< HEAD
 MEMBER 4?
+=======
+please
+>>>>>>> origin/master
