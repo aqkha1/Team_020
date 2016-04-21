@@ -6,4 +6,4 @@ MEMBER 2 CASSANDRA VONG
 
 MEMBER 3 JOHN LI
 
-no member 4th
+no 4th member 
