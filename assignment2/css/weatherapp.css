@@ -4,7 +4,6 @@ html, body {
     padding: 0; 
 }
 #map {
-    width: 500px;
-    height: 400px;
-    backgroud-color: #CCC;
-}
+        width: 500px;
+        height: 400px;
+      }

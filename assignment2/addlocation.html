@@ -12,6 +12,9 @@
         <meta name="mobile-web-app-capable" content="yes" />
         <link rel="shortcut icon" sizes="196x196" href="images/icon.png" />
         <link rel="apple-touch-icon-precomposed" href="images/icon.png" />
+        <style>
+      
+    </style>
     </head>
     
     <body>
@@ -30,11 +33,12 @@
                 <!--   Main page content here:   -->  
                   <h2> Add Location </h2>
                   <h3> Location: </h3>
-                  <input id = "location"></input>
+                  <input id = "address"></input>
                     <h3> Nickname: </h3>
                     <input id = "nickname"></input>
               <div id = 'map'></div>
-                    <button id = "btn1" onclick = "addLocation"> Add Location </button>
+
+                    <button id = "btn1" onclick = "location.href = 'index.html';"> Add Location </button>        
               </div>
             </div>
           </main>    
@@ -43,6 +47,7 @@
         <!--   JavaScript files:   -->
         <script src="js/locationWeatherCache.js"></script>
         <script src="js/addlocationPage.js"></script>
-        <script src = "https://maps.googleapis.com/maps/f853983d0101fca6383edc5d38ca6d10/js?callback=initMap" async defer></script>
+         <script src="https://maps.googleapis.com/maps/api/js?callback=initMap"
+        async defer></script>
     </body>
 </html>
