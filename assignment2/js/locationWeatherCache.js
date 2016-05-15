@@ -25,6 +25,7 @@ Date.prototype.forecastDateString = function() {
 
 // Prefix to use for Local Storage.  You may change this.
 var APP_PREFIX = "weatherApp";
+var counter = 0;
 
 function LocationWeatherCache()
 {
@@ -38,12 +39,18 @@ function LocationWeatherCache()
     // Returns the number of locations stored in the cache.
     //
     this.length = function() {
+        return locations.length;
     };
     
     // Returns the location object for a given index.
     // Indexes begin at zero.
     //
     this.locationAtIndex = function(index) {
+        for (var i = 0, i < locations.length; i ++) {
+            if (index === locations[i]) {
+                return i;
+            }
+        }
     };
 
     // Given a latitude, longitude and nickname, this method saves a 
@@ -52,12 +59,21 @@ function LocationWeatherCache()
     //
     this.addLocation = function(latitude, longitude, nickname)
     {
+        localStorage.setItem(counter, var obj = {
+                                         lat: latitude,
+                                         lng: longitude,
+                                         name: nickname,
+                                         forcasts:
+                                         })
+        counter ++
+        return counter;
     }
 
     // Removes the saved location at the given index.
     // 
     this.removeLocationAtIndex = function(index)
     {
+        localStorage.removeItem(index)
     }
 
     // This method is used by JSON.stringify() to serialise this class.
