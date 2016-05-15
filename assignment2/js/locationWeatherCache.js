@@ -81,6 +81,11 @@ function LocationWeatherCache()
     // are active web service requests and so doesn't need to be saved.
     //
     this.toJSON = function() {
+    /*
+    //If it helps, or just delete
+        var JSONlocations = JSON.stringify(locations);
+        retun JSONlocations 
+    */
     };
 
     // Given a public-data-only version of the class (such as from
@@ -128,11 +133,19 @@ function LocationWeatherCache()
 //
 function loadLocations()
 {
+    /*
+    //If it helps, or just delete
+    var loadLocationsWeatherCache = localStorage.getItem(APP_PREFFIX+counter, parse(LocationWeatherCache))
+    */
 }
 
 // Save the singleton locationWeatherCache to Local Storage.
 //
 function saveLocations()
 {
+    /*
+    //If it helps, or just delete
+    var savedLocationsWeatherCache = localStorage.setItem(APP_PREFFIX+counter, LocationWeatherCache)
+    */
 }
 
