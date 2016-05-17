@@ -27,10 +27,10 @@ Date.prototype.forecastDateString = function() {
 var APP_PREFIX = "weatherApp";
 var counter = 0;
 
-function LocationWeatherCache(latlng, nickname)
+function LocationWeatherCache(lat, lng, nickname)
 {
-    var lat = latlng.lat;
-    var lng = latlng.lng;
+    var lat = lat;
+    var lng = lng;
     var name = nickname;
     // Private attributes:
 
@@ -62,9 +62,12 @@ function LocationWeatherCache(latlng, nickname)
     //
     this.addLocation = function()
     {
-        localStorage.setItem(APP_PREFIX + counter, locations)
-        counter ++
-        return counter;
+        newLocation = location.toJSON()
+       locations.push(newLocation)
+        var tempLocations = JSON.stringify(locations)
+        console.log(JSON.stringify(locations) + " " + lng + " " + name);    
+        localStorage.setItem(APP_PREFIX, Locations)
+        
     }
 
     // Removes the saved location at the given index.
@@ -81,12 +84,12 @@ function LocationWeatherCache(latlng, nickname)
     this.toJSON = function() {
     
     //If it helps, or just delete
-        var location = {
+        var newLocation = {
             lat: lat,
             lng: lng,
-            name: nickname
+            name: name
         };
-        return location;
+        return newLocation;
     
     };
 

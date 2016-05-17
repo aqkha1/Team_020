@@ -1,7 +1,7 @@
 // Code for the Add Location page.
 var map;
 var infowindow;
-
+var tempLat, tempLng, tempName;
 
 function initMap () 
 {
@@ -32,20 +32,17 @@ function geocodeAddress(geocoder) {
                                 content: results[0].formatted_address
                  });
                  infowindow.open(map, marker);
-                 console.log(JSON.stringify(results[0].geometry.location));
-                 console.log(results[0].geometry.location.longitude);
-                 var locationCacheInstance = new LocationWeatherCache();
-                 if(document.getElementById('nickname') !== null) {
-                    locationCacheInstance.addLocation(results[0].geometry.location, document.getElementById('nickname'));
-                 } else {
-                      locationCacheInstance.addLocation(results[0].geometry.location, results[0].formatted_address);
-                 }
+                               
+                 tempLat = JSON.stringify(results[0].geometry.location.lat());
+                 tempLng = JSON.stringify(results[0].geometry.location.lng());
+                 tempName = JSON.stringify(results[0].formatted_address);                
+                 
             });
 };
 
-
-
-
 function addLocation () {
-   locations.push() 
+    
+     var LCI = new LocationWeatherCache();
+        LCI.addLocation(tempLat, tempLng, tempName);
+                 
 };
