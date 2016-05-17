@@ -27,8 +27,11 @@ Date.prototype.forecastDateString = function() {
 var APP_PREFIX = "weatherApp";
 var counter = 0;
 
-function LocationWeatherCache()
+function LocationWeatherCache(latlng, nickname)
 {
+    var lat = latlng.lat;
+    var lng = latlng.lng;
+    var name = nickname;
     // Private attributes:
 
     var locations = [];
@@ -46,7 +49,7 @@ function LocationWeatherCache()
     // Indexes begin at zero.
     //
     this.locationAtIndex = function(index) {
-        for (var i = 0, i < locations.length; i ++) {
+        for (var i = 0; i < locations.length; i ++) {
             if (index === locations[i]) {
                 return i;
             }
@@ -57,14 +60,9 @@ function LocationWeatherCache()
     // new location into the cache.  It will have an empty 'forecasts'
     // property.  Returns the index of the added location.
     //
-    this.addLocation = function(latitude, longitude, nickname)
+    this.addLocation = function()
     {
-        localStorage.setItem(counter, var obj = {
-                                         lat: latitude,
-                                         lng: longitude,
-                                         name: nickname,
-                                         forcasts:
-                                         })
+        localStorage.setItem(APP_PREFIX + counter, locations)
         counter ++
         return counter;
     }
@@ -81,11 +79,15 @@ function LocationWeatherCache()
     // are active web service requests and so doesn't need to be saved.
     //
     this.toJSON = function() {
-    /*
+    
     //If it helps, or just delete
-        var JSONlocations = JSON.stringify(locations);
-        retun JSONlocations 
-    */
+        var location = {
+            lat: lat,
+            lng: lng,
+            name: nickname
+        };
+        return location;
+    
     };
 
     // Given a public-data-only version of the class (such as from
@@ -124,6 +126,10 @@ function LocationWeatherCache()
     // matching latitude and longitude if one exists, otherwise it
     // returns -1.
     //
+    
+    for (var i = 0; i  < localStorage.length; i ++) {
+       
+    }
     function indexForLocation(latitude, longitude)
     {
     }

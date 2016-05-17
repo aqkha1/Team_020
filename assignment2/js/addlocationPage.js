@@ -2,6 +2,7 @@
 var map;
 var infowindow;
 
+
 function initMap () 
 {
     var geocoder = new google.maps.Geocoder ();
@@ -31,8 +32,19 @@ function geocodeAddress(geocoder) {
                                 content: results[0].formatted_address
                  });
                  infowindow.open(map, marker);
+                 console.log(JSON.stringify(results[0].geometry.location));
+                 console.log(results[0].geometry.location.longitude);
+                 var locationCacheInstance = new LocationWeatherCache();
+                 if(document.getElementById('nickname') !== null) {
+                    locationCacheInstance.addLocation(results[0].geometry.location, document.getElementById('nickname'));
+                 } else {
+                      locationCacheInstance.addLocation(results[0].geometry.location, results[0].formatted_address);
+                 }
             });
 };
+
+
+
 
 function addLocation () {
    locations.push() 
