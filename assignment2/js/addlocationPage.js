@@ -32,15 +32,12 @@ function geocodeAddress(geocoder) {
                                 content: results[0].formatted_address
                  });
                  infowindow.open(map, marker);
-                               
+                 tempName = JSON.stringify(results[0].formatted_address);            
                  tempLat = JSON.stringify(results[0].geometry.location.lat());
                  tempLng = JSON.stringify(results[0].geometry.location.lng());
-                 if (document.getElementById('nickname').value !== "") { 
-                     tempName = document.getElementById('nickname').value;
-                 } else {
-                    tempName = JSON.stringify(results[0].formatted_address); 
-                     console.log(document.getElementById('nickname').value);
-                 }
+                 
+                 
+               
                                  
                  
             });
@@ -48,7 +45,12 @@ function geocodeAddress(geocoder) {
 
 function addLocation () {
     
+      if (document.getElementById('nickname').value !== "") { 
+                     tempName = document.getElementById('nickname').value
+                 };                 
+    
      var LCI = new LocationWeatherCache();
      LCI.addLocation(tempLat, tempLng, tempName);
+     saveLocations();
                  
 };

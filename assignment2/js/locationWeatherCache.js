@@ -139,6 +139,7 @@ function LocationWeatherCache(lat, lng, nickname)
     }
     function indexForLocation(latitude, longitude)
     {
+        
     }
 }
 
@@ -146,17 +147,14 @@ function LocationWeatherCache(lat, lng, nickname)
 //
 function loadLocations()
 {
-    /*
-    //If it helps, or just delete
-    var loadLocationsWeatherCache = localStorage.getItem(APP_PREFFIX+counter, parse(LocationWeatherCache))
-    */
+    
 }
 
 // Save the singleton locationWeatherCache to Local Storage.
 //
 function saveLocations()
 {
-    var temp = JSON.stringify(newLocation);
+    var temp = JSON.stringify(locations);
     localStorage.setItem(APP_PREFIX + name, temp);
 }
 
