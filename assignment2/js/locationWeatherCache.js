@@ -29,9 +29,15 @@ var counter = 0;
 
 function LocationWeatherCache(lat, lng, nickname)
 {
-    var lat = lat;
-    var lng = lng;
-    var name = nickname;
+    var lat = tempLat;
+    var lng = tempLng;
+    var name = tempName;
+    var newLocation = {
+            lat: lat,
+            lng: lng,
+            name: name,
+        }
+    
     // Private attributes:
 
     var locations = [];
@@ -62,11 +68,9 @@ function LocationWeatherCache(lat, lng, nickname)
     //
     this.addLocation = function()
     {
-        newLocation = location.toJSON()
-       locations.push(newLocation)
-        var tempLocations = JSON.stringify(locations)
-        console.log(JSON.stringify(locations) + " " + lng + " " + name);    
-        localStorage.setItem(APP_PREFIX, Locations)
+        
+        locations.push(newLocation);
+        return locations.length;
         
     }
 
@@ -74,7 +78,7 @@ function LocationWeatherCache(lat, lng, nickname)
     // 
     this.removeLocationAtIndex = function(index)
     {
-        localStorage.removeItem(index)
+        location.pop(location[index]);
     }
 
     // This method is used by JSON.stringify() to serialise this class.
@@ -152,9 +156,7 @@ function loadLocations()
 //
 function saveLocations()
 {
-    /*
-    //If it helps, or just delete
-    var savedLocationsWeatherCache = localStorage.setItem(APP_PREFFIX+counter, LocationWeatherCache)
-    */
+    var temp = JSON.stringify(newLocation);
+    localStorage.setItem(APP_PREFIX + name, temp);
 }
 
