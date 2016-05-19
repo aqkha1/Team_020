@@ -41,8 +41,11 @@ function geocodeAddress(geocoder) {
 };
 
 function addLocation () {
-    
-     var LCI = new LocationWeatherCache();
-        LCI.addLocation(tempLat, tempLng, tempName);
+     
+     if (document.getElementById('nickname').value !== "") {
+         tempName = document.getElementById('nickname').value
+     }
+    var LCI = new LocationWeatherCache(tempLat, tempLng, tempName);
+     LCI.addLocation(tempLat, tempLng, tempName);
                  
 };

@@ -1,44 +1,30 @@
-
-// Returns a date in the format "YYYY-MM-DD".
-Date.prototype.simpleDateString = function() {
-    function pad(value)
-    {
-        return ("0" + value).slice(-2);
-    }
-
-    var dateString = this.getFullYear() + "-" + 
-            pad(this.getMonth() + 1, 2) + '-' + 
-            pad(this.getDate(), 2);
-    
-    return dateString;
-}
-
-// Date format required by forecast.io API.
-// We always represent a date with a time of midday,
-// so our choice of day isn't susceptible to time zone errors.
-Date.prototype.forecastDateString = function() {
-    return this.simpleDateString() + "T12:00:00";
-}
-
-
-// Code for LocationWeatherCache class and other shared code.
-
 // Prefix to use for Local Storage.  You may change this.
 var APP_PREFIX = "weatherApp";
 var counter = 0;
+
 
 function LocationWeatherCache(lat, lng, nickname)
 {
     var lat = lat;
     var lng = lng;
     var name = nickname;
+    var newLocation = {
+        lat: lat,
+        lng: lng,
+        name: name
+    }
+    
     // Private attributes:
 
     var locations = [];
     var callbacks = {};
+    
+    locations = loadLocations();
 
     // Public methods:
-    
+    this.retrieveLocations = function () {
+        return locations;
+    }
     // Returns the number of locations stored in the cache.
     //
     this.length = function() {
@@ -62,11 +48,9 @@ function LocationWeatherCache(lat, lng, nickname)
     //
     this.addLocation = function()
     {
-        newLocation = location.toJSON()
-       locations.push(newLocation)
-        var tempLocations = JSON.stringify(locations)
-        console.log(JSON.stringify(locations) + " " + lng + " " + name);    
-        localStorage.setItem(APP_PREFIX, Locations)
+        locations.push(newLocation)
+        saveLocations(locations);
+        return locations.length
         
     }
 
@@ -74,7 +58,7 @@ function LocationWeatherCache(lat, lng, nickname)
     // 
     this.removeLocationAtIndex = function(index)
     {
-        localStorage.removeItem(index)
+        
     }
 
     // This method is used by JSON.stringify() to serialise this class.
@@ -129,6 +113,11 @@ function LocationWeatherCache(lat, lng, nickname)
     // matching latitude and longitude if one exists, otherwise it
     // returns -1.
     //
+    if () {
+        
+    } else {
+        return -1;
+    }
     
     for (var i = 0; i  < localStorage.length; i ++) {
        
@@ -142,19 +131,38 @@ function LocationWeatherCache(lat, lng, nickname)
 //
 function loadLocations()
 {
-    /*
-    //If it helps, or just delete
-    var loadLocationsWeatherCache = localStorage.getItem(APP_PREFFIX+counter, parse(LocationWeatherCache))
-    */
+ return JSON.parse(localStorage.getItem(APP_PREFIX))
 }
 
 // Save the singleton locationWeatherCache to Local Storage.
 //
-function saveLocations()
+function saveLocations(LOCS)
 {
-    /*
-    //If it helps, or just delete
-    var savedLocationsWeatherCache = localStorage.setItem(APP_PREFFIX+counter, LocationWeatherCache)
-    */
+    var temp = JSON.stringify(LOCS);
+    localStorage.setItem(APP_PREFIX, temp)
 }
 
+//_____________________________________________
+// Returns a date in the format "YYYY-MM-DD".
+Date.prototype.simpleDateString = function() {
+    function pad(value)
+    {
+        return ("0" + value).slice(-2);
+    }
+
+    var dateString = this.getFullYear() + "-" + 
+            pad(this.getMonth() + 1, 2) + '-' + 
+            pad(this.getDate(), 2);
+    
+    return dateString;
+}
+
+// Date format required by forecast.io API.
+// We always represent a date with a time of midday,
+// so our choice of day isn't susceptible to time zone errors.
+Date.prototype.forecastDateString = function() {
+    return this.simpleDateString() + "T12:00:00";
+}
+
+
+// Code for LocationWeatherCache class and other shared code.
