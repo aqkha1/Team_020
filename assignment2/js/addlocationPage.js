@@ -32,20 +32,34 @@ function geocodeAddress(geocoder) {
                                 content: results[0].formatted_address
                  });
                  infowindow.open(map, marker);
-                               
+                 tempName = JSON.stringify(results[0].formatted_address);            
                  tempLat = JSON.stringify(results[0].geometry.location.lat());
                  tempLng = JSON.stringify(results[0].geometry.location.lng());
-                 tempName = JSON.stringify(results[0].formatted_address);                
+                 
+                 
+               
+                                 
                  
             });
 };
 
 function addLocation () {
+<<<<<<< HEAD
      
      if (document.getElementById('nickname').value !== "") {
          tempName = document.getElementById('nickname').value
      }
     var LCI = new LocationWeatherCache(tempLat, tempLng, tempName);
      LCI.addLocation(tempLat, tempLng, tempName);
+=======
+    
+      if (document.getElementById('nickname').value !== "") { 
+                     tempName = document.getElementById('nickname').value
+                 };                 
+    
+     var LCI = new LocationWeatherCache();
+     LCI.addLocation(tempLat, tempLng, tempName);
+     saveLocations();
+>>>>>>> origin/master
                  
 };

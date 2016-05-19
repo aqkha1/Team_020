@@ -5,6 +5,7 @@ var counter = 0;
 
 function LocationWeatherCache(lat, lng, nickname)
 {
+<<<<<<< HEAD
     var lat = lat;
     var lng = lng;
     var name = nickname;
@@ -13,6 +14,16 @@ function LocationWeatherCache(lat, lng, nickname)
         lng: lng,
         name: name
     }
+=======
+    var lat = tempLat;
+    var lng = tempLng;
+    var name = tempName;
+    var newLocation = {
+            lat: lat,
+            lng: lng,
+            name: name,
+        }
+>>>>>>> origin/master
     
     // Private attributes:
 
@@ -48,9 +59,15 @@ function LocationWeatherCache(lat, lng, nickname)
     //
     this.addLocation = function()
     {
+<<<<<<< HEAD
         locations.push(newLocation)
         saveLocations(locations);
         return locations.length
+=======
+        
+        locations.push(newLocation);
+        return locations.length;
+>>>>>>> origin/master
         
     }
 
@@ -58,7 +75,11 @@ function LocationWeatherCache(lat, lng, nickname)
     // 
     this.removeLocationAtIndex = function(index)
     {
+<<<<<<< HEAD
         
+=======
+        location.pop(location[index]);
+>>>>>>> origin/master
     }
 
     // This method is used by JSON.stringify() to serialise this class.
@@ -124,6 +145,7 @@ function LocationWeatherCache(lat, lng, nickname)
     }
     function indexForLocation(latitude, longitude)
     {
+        
     }
 }
 
@@ -131,15 +153,24 @@ function LocationWeatherCache(lat, lng, nickname)
 //
 function loadLocations()
 {
+<<<<<<< HEAD
  return JSON.parse(localStorage.getItem(APP_PREFIX))
+=======
+    
+>>>>>>> origin/master
 }
 
 // Save the singleton locationWeatherCache to Local Storage.
 //
 function saveLocations(LOCS)
 {
+<<<<<<< HEAD
     var temp = JSON.stringify(LOCS);
     localStorage.setItem(APP_PREFIX, temp)
+=======
+    var temp = JSON.stringify(locations);
+    localStorage.setItem(APP_PREFIX + name, temp);
+>>>>>>> origin/master
 }
 
 //_____________________________________________
