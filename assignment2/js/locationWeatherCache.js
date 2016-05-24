@@ -141,7 +141,7 @@ function LocationWeatherCache()
         var desiredDate = new Date(response.daily.data[0].time*1000)
         desiredDate = desiredDate.forecastDateString();
 
-        var name = response.latitude + ',' + response.longitude + ',' + x;
+        var name = response.latitude + ',' + response.longitude + ',' + desiredDate;
         var callbackFunction = callbacks[name];
         
         for (var i = 0; i < locations.length; i ++) {

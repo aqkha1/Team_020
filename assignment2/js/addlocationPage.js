@@ -13,15 +13,16 @@ function initMap () {
                 center: {lat: -37.9145, lng: 145.1303}
         
                 });
+    //EventListeners, the add Location button and when a key is typed in the 'address' input
+    document.getElementById('btn1').addEventListener('click', function () {         
+        addLocation();
+    });                                                                        
+    document.getElementById('address').addEventListener('keyup', function () {
+        geocodeAddress(geocoder, map);
+    });
 }
 
-//EventListeners, the add Location button and when a key is typed in the 'address' input
-document.getElementById('btn1').addEventListener('click', function () {         
-    addLocation();
-});                                                                        
-document.getElementById('address').addEventListener('keyup', function () {
-    geocodeAddress(geocoder, map);
-});
+
 
 //Takes what the user types in the 'address' input and converts it to a LatLng for the ma to be centred around. It then finds the formated address of that Location and adds it along with a marker to a map on the selected location. If the text you entered doesn't match a formatted address the input turns red, the marker dissapears and the page will not allow you to save that location.
 function geocodeAddress(geocoder) {
