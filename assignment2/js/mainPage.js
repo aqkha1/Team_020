@@ -1,6 +1,7 @@
+//loads the locations from storage
 var listLocations = loadLocations();
 
-
+//For however many locations are saved, create that many list elements
 for (var i = 1; i < LCI.length(); i++ ) {
     var list = document.createElement('list');
     list.setAttribute('class', "mdl-list__item mdl-list__item--two-line");
@@ -8,6 +9,7 @@ for (var i = 1; i < LCI.length(); i++ ) {
     document.getElementById('locationList').appendChild(list);
 }
 
+//When something inside the locationLit is clicked it takes the id of the element that was clicked (list0, span1, div0 etc) and takes the last character which, because of how they were named, is the index of that location.It then save that index to local storage and directs the user to the view location page.
 document.getElementById('locationList').onclick = function(e) {
     if (parseFloat(e.target.id.slice(-1)) !== undefined) {
              localStorage.setItem(APP_PREFIX + "-selectedLocation", parseFloat(e.target.id.slice(-1)))
@@ -16,12 +18,14 @@ document.getElementById('locationList').onclick = function(e) {
 
 }
 
+//Call the weather for each location in the list for the current date.
 for (var index = 1; index < LCI.length(); index ++) {
 			var currentDate = new Date;
 			var apiDate = currentDate.forecastDateString();
 			LCI.getWeatherAtIndexForDate(index, apiDate, addWeather);
 }
 
+//Create the inner elements of each location list and retrieve the weather summary and icon properties of the forcasts object and set them as the text fields. Retieve the corrosponding image and add it to the page. If the saved name is loger than 20 characters, shorten it and add '...' to signify that it has been shortened as the design can only cope with two lines of text.
 function addWeather (response, callbackLocation) {
 	
     var index = indexForLocation(response.lat, response.lng);

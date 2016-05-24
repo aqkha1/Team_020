@@ -25,13 +25,14 @@ Date.prototype.forecastDateString = function() {
 
 // Prefix to use for Local Storage.  You may change this.
 var APP_PREFIX = "1003_SUCKS";
+//Create a new instance of the cache.
 var LCI = new LocationWeatherCache();
 
 function LocationWeatherCache()
 {
     // Private attributes:
     
-    // If there are no locations saved in storage, save the skeleton of the array with the skeleton of the current location object so that there is no error when the local storage is saved to the local locations array
+    // If there are no locations saved in storage, save the skeleton of the array and add the base of the current location to location[0].  In turn save that array to storage.
     if (localStorage.getItem(APP_PREFIX) === null) {
          var locations = [{lat: null,
                     lng: null,
@@ -42,6 +43,7 @@ function LocationWeatherCache()
    
     var callbacks = new Object();
     
+    //Retrieves the locations from storage
     var locations = loadLocations();
     // Public methods:
     
@@ -136,8 +138,8 @@ function LocationWeatherCache()
     //
     this.weatherResponse = function(response) {
         
-        var x = new Date(response.daily.data[0].time*1000)
-        x = x.forecastDateString();
+        var desiredDate = new Date(response.daily.data[0].time*1000)
+        desiredDate = desiredDate.forecastDateString();
 
         var name = response.latitude + ',' + response.longitude + ',' + x;
         var callbackFunction = callbacks[name];
