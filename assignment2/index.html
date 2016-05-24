@@ -34,23 +34,14 @@
                 to use JavaScript to generate a list of similar structure.
             -->  
             <ul class="mdl-list" id="locationList">
-              <li class="mdl-list__item mdl-list__item--two-line" onclick="viewLocation(0);">
-                <span class="mdl-list__item-primary-content">
-                  <img class="mdl-list__item-icon" id="icon0" src="images/loading.png" class="list-avatar" />
-                    
-                    <span id = 'subtitle'></span>
-                  <span>Location A</span>
-                  <span id="weather0" class="mdl-list__item-sub-title">Weather summary</span>
-                </span>
-              </li>
-              <li class="mdl-list__item mdl-list__item--two-line" onclick="viewLocation(1);">
-                <span class="mdl-list__item-primary-content">
-                  <img class="mdl-list__item-icon" id="icon1" src="images/loading.png" class="list-avatar" />
-                  <span>Location B</span>
-                  <span id="weather1" class="mdl-list__item-sub-title">Weather summary</span>
-                </span>
-                  <div id = 'div'></div>
-              </li>
+                <li class="mdl-list__item mdl-list__item--two-line" id='list0'>
+                    <span class="mdl-list__item-primary-content">
+                        <img class="mdl-list__item-icon" id="image0" src="images/loading.png" class="list-avatar"/>
+                        <span></span>
+                        <span id = 'title0'>Current Location</span>
+                        <span id="weatherSummary0" class="mdl-list__item-sub-title">Tap for more detail</span>
+                    </span>
+                </li>
             </ul>
             <!--   End sample locations list.   -->  
 
