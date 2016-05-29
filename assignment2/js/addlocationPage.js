@@ -10,7 +10,7 @@ function initMap () {
     map = new google.maps.Map(mapDiv, 
                 {
                 zoom: 13,
-                center: {lat: -37.9145, lng: 145.1303}
+                center: {lat: -37.9141, lng: 145.1343}
         
                 });
     //EventListeners, the add Location button and when a key is typed in the 'address' input
@@ -30,12 +30,6 @@ function geocodeAddress(geocoder) {
 
                 geocoder.geocode( { 'address': address}, function(results, status) {
                  if(results[0] !== undefined) {
-                     var formattedAddress = results[0].formatted_address.toLocaleLowerCase();
-                     var enteredAddress = document.getElementById("address").value.toLowerCase();
-                     var rgxp = new RegExp(enteredAddress, "y")
-
-                     if(formattedAddress.match(rgxp))  {
-
                          document.getElementById('address').style.backgroundColor = 'white'; 
                          map.setCenter(results[0].geometry.location); 
                          var marker = new google.maps.Marker({
@@ -48,28 +42,23 @@ function geocodeAddress(geocoder) {
 
                          });
                          infowindow.open(map, marker);
+                        //Saves the data in global variables so it can be accessed in other functions.
                          name = JSON.stringify(results[0].formatted_address); 
-
                          lat = JSON.stringify(results[0].geometry.location.lat());
                          lng = JSON.stringify(results[0].geometry.location.lng());    
                          realLocation = true;     
                      } else {
+                         
                          document.getElementById('address').style.backgroundColor = '#FF6666';
                          realLocation = false;
+                         //Remove the markers
                          for (var i = 0; i < markers.length; i ++) {
                              markers[i].setMap(null)
                          }
                          markers = [];
                          
                      }
-                 } else {
-                     document.getElementById('address').style.backgroundColor = '#FF6666';
-                     realLocation = false;
-                     for (var i = 0; i < markers.length; i ++) {
-                             markers[i].setMap(null)
-                         }
-                     markers = [];
-                 }
+                
                  
                  
                 });

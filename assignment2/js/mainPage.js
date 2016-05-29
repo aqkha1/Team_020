@@ -9,7 +9,7 @@ for (var i = 1; i < LCI.length(); i++ ) {
     document.getElementById('locationList').appendChild(list);
 }
 
-//When something inside the locationLit is clicked it takes the id of the element that was clicked (list0, span1, div0 etc) and takes the last character which, because of how they were named, is the index of that location.It then save that index to local storage and directs the user to the view location page.
+//When something inside the locationList is clicked it takes the id of the element that was clicked (list0, span1, div0 etc) and takes the last character which, because of how they were named, is the index of that location.It then save that index to local storage and directs the user to the view location page.
 document.getElementById('locationList').onclick = function(e) {
     if (parseFloat(e.target.id.slice(-1)) !== undefined) {
              localStorage.setItem(APP_PREFIX + "-selectedLocation", parseFloat(e.target.id.slice(-1)))

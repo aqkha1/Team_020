@@ -38,7 +38,7 @@ function LocationWeatherCache()
                     lng: null,
                     name: 'Current Location',
                     forcasts: new Object()}]
-         saveLocations(locations)
+         saveLocations(locations);
     }
    
     var callbacks = new Object();
@@ -120,14 +120,20 @@ function LocationWeatherCache()
         locations = loadLocations();
         var name = locations[index].lat + "," +  locations[index].lng + "," + date;
         
-        var url = "https://api.forecast.io/forecast/20f60a445b8ef7c4bc15c13164edf445/" + name  + "/?exclude=[flags,alerts,minutely,hourly,offset,currently]&units=si&callback=LCI.weatherResponse";
+        if (locations[index].forcasts[name] === undefined) {
+            var url = "https://api.forecast.io/forecast/20f60a445b8ef7c4bc15c13164edf445/" + name  + "/?exclude=[flags,alerts,minutely,hourly,offset,currently]&units=si&callback=LCI.weatherResponse";
         
-        callbacks[name] = callback;
-        
-        var script = document.createElement('script');
-        script.src = url;
-        document.body.appendChild(script);
+            callbacks[name] = callback;
+
+            var script = document.createElement('script');
+            script.src = url;
+            document.body.appendChild(script);
     
+        } else {
+            callbacks[name] = callback;
+            LCI.weatherResponse(locations[index].forcasts[name]);
+        }
+        
     };
     
     // This is a callback function passed to forecast.io API calls.

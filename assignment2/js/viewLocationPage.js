@@ -2,11 +2,7 @@
 var littleMap, apiDate;
 var output = document.getElementById('outputArea');
 //Retieve the index that was saved hen the location was tapped on the main page, set all the base 0 values.
-var index = localStorage.getItem(APP_PREFIX + '-selectedLocation')
-    , sliderStart = 0
-    , currentDate = new Date()
-    , listLocations = loadLocations()
-    , highAccuracy = false;
+var index = localStorage.getItem(APP_PREFIX + '-selectedLocation'), sliderStart = 0, currentDate = new Date(), listLocations = loadLocations(), highAccuracy = false;
 //set the heade to the saved name for the respective location
 document.getElementById('headerBarTitle').innerHTML = listLocations[index].name;
 //Dsplay the current time
@@ -22,7 +18,9 @@ function sliderMoved() {
     currentDate.setDate(currentDate.getDate() + change);
     document.getElementById('date').innerHTML = currentDate.simpleDateString();
     output.innerHTML = "Loading..."
-    setIcon('loading');
+    var image = document.getElementById('iconArea')
+    var link = 'images/loading.png';
+    image.setAttribute('src', link);
 };
 
 //When the high accuracy checkbox is changed it reverts the high accuracy setting from on to off and off to on.
@@ -32,6 +30,7 @@ function changeAccuracy() {
     } else {
         highAccuracy = true;
     }
+    initMap();
 }
 
 //Upon the page loading, if the selected location isn't the current location call the weather for the current date. Otherwise, change the text of the button from 'RemoveLocation' to 'Back' and add the High accuracy option to the page.
@@ -60,7 +59,7 @@ function sliderReleased() {
 
 //When the remove location button is pressed, calls the removeLocationAtIndex from the cache if the selected location is not the current location. If so, it only directs them back to the main page.
 function removeItem() {
-    if (index !== 'current') {
+    if (index !== '0') {
         LCI.removeLocationAtIndex(index);
     }
     location.href = 'index.html';
@@ -68,8 +67,10 @@ function removeItem() {
 
 //Takes the data from the forcasts property and outputs itthe the outputArea, for each entry the function first check that the responce has the necessary data before it outputs it. This prevents the outputting showin NaN for some data points, mainly humidity. It then finds the respective image and adds that to the image element. This function also rounds the humidity and the rain probbility to integers as it has a hibit of diaplaying '59.999999999999999'. All units are SI.
 function outputWeather(response, callbackLocation) {
-
-    outputArea.innerHTML = response.forcasts[callbackLocation].daily.data[0].summary + '</br>';
+    
+    if (response.forcasts[callbackLocation].daily.data[0].summary !== undefined) {
+    outputArea.innerHTML = response.forcasts[callbackLocation].daily.data[0].summary + '</br>';    
+        }
     if (response.forcasts[callbackLocation].daily.data[0].humidity * 100 !== undefined) {
         outputArea.innerHTML += '<b>Humidity: </b>' + Math.round(response.forcasts[callbackLocation].daily.data[0].humidity * 100) + "%" + '</br>';
     }
@@ -82,9 +83,11 @@ function outputWeather(response, callbackLocation) {
     if (response.forcasts[callbackLocation].daily.data[0].precipProbability !== undefined) {
         outputArea.innerHTML += '<b>Chance of rain:</b> ' + Math.round(response.forcasts[callbackLocation].daily.data[0].precipProbability * 100) + "%" + '</br>';
     }
-    var image = document.getElementById('iconArea')
-    var link = 'images/' + response.forcasts[callbackLocation].daily.data[0].icon + ".png";
-    image.setAttribute('src', link);
+    if (response.forcasts[callbackLocation].daily.data[0].icon !== undefined) {
+        var image = document.getElementById('iconArea')
+        var link = 'images/' + response.forcasts[callbackLocation].daily.data[0].icon + ".png";
+        image.setAttribute('src', link);
+    }
 }
 
 
